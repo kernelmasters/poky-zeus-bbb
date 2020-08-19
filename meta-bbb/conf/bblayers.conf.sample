@@ -6,14 +6,15 @@ BBPATH = "${TOPDIR}"
 BBFILES ?= ""
 
 BBLAYERS ?= " \
-  ${HOME}/poky-zeus/meta \
-  ${HOME}/poky-zeus/meta-poky \
-  ${HOME}/poky-zeus/meta-openembedded/meta-oe \
-  ${HOME}/poky-zeus/meta-openembedded/meta-networking \
-  ${HOME}/poky-zeus/meta-openembedded/meta-perl \
-  ${HOME}/poky-zeus/meta-openembedded/meta-python \
-  ${HOME}/poky-zeus/meta-qt5 \
-  ${HOME}/poky-zeus/meta-security \
-  ${HOME}/poky-zeus/meta-jumpnow \
-  ${HOME}/bbb/meta-bbb \
+  ${HOME}/poky-zeus-bbb/meta \
+  ${HOME}/poky-zeus-bbb/meta-poky \
+  ${HOME}/poky-zeus-bbb/meta-openembedded/meta-oe \
+  ${HOME}/poky-zeus-bbb/meta-openembedded/meta-networking \
+  ${HOME}/poky-zeus-bbb/meta-openembedded/meta-perl \
+  ${HOME}/poky-zeus-bbb/meta-openembedded/meta-python \
+  ${HOME}/poky-zeus-bbb/meta-qt5 \
+  ${HOME}/poky-zeus-bbb/meta-security \
+  ${HOME}/poky-zeus-bbb/meta-jumpnow \
+  ${HOME}/poky-zeus-bbb/meta-bbb \
+  ${HOME}/poky-zeus-bbb/meta-km-bbb \
 "
