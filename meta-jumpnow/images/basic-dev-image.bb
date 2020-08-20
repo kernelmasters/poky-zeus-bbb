@@ -80,6 +80,7 @@ EXTRA_TOOLS = " \
     unzip \
     wget \
     zip \
+    evtest \
 "
 
 SECURITY_TOOLS = " \

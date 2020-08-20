@@ -47,6 +47,7 @@ FEATURE_PACKAGES_nfs-server = "packagegroup-core-nfs-server"
 FEATURE_PACKAGES_nfs-client = "packagegroup-core-nfs-client"
 FEATURE_PACKAGES_ssh-server-dropbear = "packagegroup-core-ssh-dropbear"
 FEATURE_PACKAGES_ssh-server-openssh = "packagegroup-core-ssh-openssh"
+FEATURE_PACKAGES_meta-oe-test = "packagegroup-meta-oe-test"
 FEATURE_PACKAGES_hwcodecs = "${MACHINE_HWCODECS}"
 
 
@@ -62,6 +63,7 @@ MACHINE_HWCODECS ??= ""
 CORE_IMAGE_BASE_INSTALL = '\
     packagegroup-core-boot \
     packagegroup-base-extended \
+    packagegroup-meta-oe-test  \
     \
     ${CORE_IMAGE_EXTRA_INSTALL} \
     '
