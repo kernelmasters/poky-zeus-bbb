@@ -81,6 +81,7 @@ EXTRA_TOOLS = " \
     wget \
     zip \
     evtest \
+    helloworld \
 "
 
 SECURITY_TOOLS = " \
