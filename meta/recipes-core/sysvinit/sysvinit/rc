@@ -180,3 +180,10 @@ if [ "x$runlevel" != "xS" ] && [ ! -x /etc/rc${runlevel}.d/S??xserver-nodm ]; th
     	umount -l /mnt/.psplash
     fi
 fi
+
+if [[ -x /usr/bin/helloworld  ]]; then
+	echo " Hello World Application "
+	/usr/bin/helloworld &
+	sleep 2
+fi
+
