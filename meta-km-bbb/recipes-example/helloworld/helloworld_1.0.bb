@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b2424aed282074c27f97c20dcbf25df3"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
-SRCREV = "fba6d4539310ced763e3a1c24ce9c4459b2fc8fa"
+SRCREV = "5f0c16e5e1057e2cbf7ef0b243e37b1533456a40"
 SRC_URI = "git://github.com/kernelmasters/yocto-helloworld.git"
 
 S = "${WORKDIR}/git"
