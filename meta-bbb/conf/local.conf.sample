@@ -27,9 +27,9 @@ VIRTUAL-RUNTIME_init_manager = "sysvinit"
 
 MACHINE = "beaglebone"
 
-# DL_DIR = "/src/oe"
-# SSTATE_DIR = "/oe5/bbb/sstate-cache"
-# TMPDIR = "/oe5/bbb/tmp-zeus"
+DL_DIR = "/home/km/poky-zeus-bbb/build/sources"
+SSTATE_DIR = "/home/km/poky-zeus-bbb/build/sstate-cache"
+TMPDIR = "/home/km/poky-zeus-bbb/build/tmp"
 
 DISTRO = "poky"
 
@@ -41,9 +41,9 @@ SDKMACHINE = "x86_64"
 # for empty root password
 # EXTRA_IMAGE_FEATURES = "debug-tweaks"
 
-# to enable a root password of jumpnowtek
+# to enable a root password of km
 INHERIT += "extrausers"
-EXTRA_USERS_PARAMS = "usermod -P jumpnowtek root; "
+EXTRA_USERS_PARAMS = "usermod -P km root; "
 
 # to force a password change on first login
 INHERIT += "chageusers"

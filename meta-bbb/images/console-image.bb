@@ -1,5 +1,5 @@
 SUMMARY = "A console development image"
-HOMEPAGE = "http://www.jumpnowtek.com"
+HOMEPAGE = "http://www.kernelmasters.org"
 
 require images/basic-dev-image.bb
 
