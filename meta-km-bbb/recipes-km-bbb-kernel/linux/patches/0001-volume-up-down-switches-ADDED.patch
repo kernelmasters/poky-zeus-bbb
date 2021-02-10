@@ -1,0 +1,38 @@
+From 5f9e7a32e5e9e7ac484b0f29c890cd726d4c5cf7 Mon Sep 17 00:00:00 2001
+From: boddu kishore kumar <kishore@kernelmasters.org>
+Date: Fri, 29 Jan 2021 20:52:09 +0530
+Subject: [PATCH] volume up & down switches ADDED
+
+---
+ arch/arm/boot/dts/km-bbb-am335x.dts | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/arch/arm/boot/dts/km-bbb-am335x.dts b/arch/arm/boot/dts/km-bbb-am335x.dts
+index 89a55d302..535af2109 100644
+--- a/arch/arm/boot/dts/km-bbb-am335x.dts
++++ b/arch/arm/boot/dts/km-bbb-am335x.dts
+@@ -48,6 +48,21 @@
+                         wakeup-source;
+                 };
+ 
++		switch26 {
++                        label = "volume down";
++                        linux,code = <114>;
++                        /*linux,code = <KEY_VOLUMEDOWN>;*/
++                        gpios = <&gpio0 26 GPIO_ACTIVE_HIGH>;
++                        wakeup-source;
++                };
++
++		switch27 {
++                        label = "volume up";
++                        linux,code = <115>;
++                        /*linux,code = <KEY_VOLUMEUP>;*/
++                        gpios = <&gpio0 27 GPIO_ACTIVE_HIGH>;
++                        wakeup-source;
++                };
+ 	};
+ };
+ 
+-- 
+2.17.1
+

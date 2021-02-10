@@ -16,4 +16,5 @@ BBLAYERS ?= " \
   ${HOME}/poky-zeus-bbb/meta-security \
   ${HOME}/poky-zeus-bbb/meta-jumpnow \
   ${HOME}/poky-zeus-bbb/meta-bbb \
+  ${HOME}/poky-zeus-bbb/meta-km-bbb \
 "
