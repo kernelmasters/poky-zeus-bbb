@@ -1,0 +1,71 @@
+From 7c14ec94be2e73fc5f04090139f3fb1fe7753c74 Mon Sep 17 00:00:00 2001
+From: BodduKishoreKumar <kishore@kernelmasters.org>
+Date: Fri, 14 May 2021 11:58:13 +0530
+Subject: [PATCH 5/5] Enter Switch (GPIO11: Raising Edge Interrupt) porting on
+ KM-BBB target board
+
+---
+ arch/arm/boot/dts/km-bbb-am335x.dts | 10 ++++++++++
+ drivers/input/keyboard/gpio_keys.c  | 11 +++++++++++
+ 2 files changed, 21 insertions(+)
+
+diff --git a/arch/arm/boot/dts/km-bbb-am335x.dts b/arch/arm/boot/dts/km-bbb-am335x.dts
+index ff5dfd4f3..4c75d54e2 100644
+--- a/arch/arm/boot/dts/km-bbb-am335x.dts
++++ b/arch/arm/boot/dts/km-bbb-am335x.dts
+@@ -31,6 +31,16 @@
+                 regulator-max-microvolt = <3300000>;
+         };
+ 
++        gpio-keys {
++                       compatible = "gpio-keys";
++                         autorepeat;
++                         enter {
++                                 label = "GPIO Key ENTER";
++                                 linux,code = <28>;
++                                 gpios = <&gpio0 11 0>;
++                         };
++         };
++
+ };
+ 
+ &am33xx_pinmux {
+diff --git a/drivers/input/keyboard/gpio_keys.c b/drivers/input/keyboard/gpio_keys.c
+index 492a971b9..4776f62fe 100644
+--- a/drivers/input/keyboard/gpio_keys.c
++++ b/drivers/input/keyboard/gpio_keys.c
+@@ -32,6 +32,8 @@
+ #include <linux/spinlock.h>
+ #include <dt-bindings/input/gpio-keys.h>
+ 
++#define KM_DEBUG
++
+ struct gpio_button_data {
+ 	const struct gpio_keys_button *button;
+ 	struct input_dev *input;
+@@ -778,6 +780,11 @@ static int gpio_keys_probe(struct platform_device *pdev)
+ 	int i, error;
+ 	int wakeup = 0;
+ 
++
++	#ifdef KM_DEBUG
++	printk("%s:%s:%d\n",__FILE__,__func__,__LINE__);
++	#endif
++
+ 	if (!pdata) {
+ 		pdata = gpio_keys_get_devtree_pdata(dev);
+ 		if (IS_ERR(pdata))
+@@ -872,6 +879,10 @@ static int gpio_keys_probe(struct platform_device *pdev)
+ 
+ 	device_init_wakeup(dev, wakeup);
+ 
++	#ifdef KM_DEBUG
++	printk("%s:%s:%d\n",__FILE__,__func__,__LINE__);
++	#endif
++
+ 	return 0;
+ }
+ 
+-- 
+2.17.1
+

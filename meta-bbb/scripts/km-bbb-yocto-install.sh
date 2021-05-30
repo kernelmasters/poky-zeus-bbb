@@ -128,23 +128,23 @@ while [ ! -z "$1" ] ; do
 		#KERNEL_UTS=$(cat "./abc" | awk '{print $1}' | sed 's/\"//g' )
 
 		KERNEL_UTS=4.19.94-km-bbb
-		cd /mnt/rootfs/boot/
+		#cd /mnt/rootfs/boot/
+		sudo rm /mnt/rootfs/boot/*.dtb
 		
 		echo -e "${Purple}mkdir -p dtbs/${KERNEL_UTS}${NC}"
-		sudo mkdir -p dtbs/${KERNEL_UTS}
+		sudo mkdir -p /mnt/rootfs/boot/dtbs/${KERNEL_UTS}
 
-		echo -e "${Purple}sudo mv km-bbb-am335x.dtb dtbs/${KERNEL_UTS}/${NC}"
-		sudo mv km-bbb-am335x.dtb dtbs/${KERNEL_UTS}/
-		echo -e "${Purple}sudo mv zImage-${KERNEL_UTS}  vmlinuz-${KERNEL_UTS}${NC}"
-		sudo mv zImage-*  vmlinuz-${KERNEL_UTS}
+		echo -e "${Purple}sudo mv km-bbb-am335x.dtb /mnt/rootfs/boot/dtbs/${KERNEL_UTS}/${NC}"
+		sudo cp ${SRCDIR}/km-bbb-am335x.dtb /mnt/rootfs/boot/dtbs/${KERNEL_UTS}/km-bbb-am335x.dtb
+		echo -e "${Purple}sudo mv zImage-${KERNEL_UTS}  /mnt/rootfs/boot/vmlinuz-${KERNEL_UTS}${NC}"
+		sudo cp ${SRCDIR}/zImage  /mnt/rootfs/boot/vmlinuz-${KERNEL_UTS}
 
-		sudo  echo "uname_r=${KERNEL_UTS}" > uEnv.txt
-		sudo  echo "board_no=1" >> uEnv.txt
+		sudo  echo "uname_r=${KERNEL_UTS}" > /mnt/rootfs/boot/uEnv.txt
+		sudo  echo "board_no=1" >> /mnt/rootfs/boot/uEnv.txt
 
 		echo -e "${Purple}Syncing ...${NC}"
 		sync
-		#unmount_all_drive_partitions
-		#sudo umount /dev/${media}1
+		unmount_all_drive_partitions
 		cd -
 		;;
         esac
