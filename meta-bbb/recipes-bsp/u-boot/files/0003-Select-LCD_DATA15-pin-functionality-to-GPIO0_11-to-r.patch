@@ -1,0 +1,26 @@
+From fd507980d4dc441f6ff562033c8e7b891ea57145 Mon Sep 17 00:00:00 2001
+From: BodduKishoreKumar <kishore@kernelmasters.org>
+Date: Tue, 4 May 2021 22:07:17 +0530
+Subject: [PATCH 3/3] Select LCD_DATA15 pin functionality to GPIO0_11 to read
+ Switch status
+
+---
+ board/ti/am335x/mux.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/board/ti/am335x/mux.c b/board/ti/am335x/mux.c
+index 6f573fa7..a983481d 100644
+--- a/board/ti/am335x/mux.c
++++ b/board/ti/am335x/mux.c
+@@ -32,7 +32,7 @@ static struct module_pin_mux lcd_pin_mux[] = {
+         {OFFSET(lcd_hsync), (MODE(7) | PULLUDEN)},   /* GPIO2_23 */    //-->KM-LCD_RW
+         {OFFSET(lcd_data13), (MODE(0))},             /* lcd_data13 */ // By default disable Buzzer
+         {OFFSET(lcd_data14), (MODE(7))},             /* lcd_data14 */ // Enable RED LED
+-        {OFFSET(lcd_data15), (MODE(0))},             /* lcd_data15 */ // Bydefault disable USER SW
++        {OFFSET(lcd_data15), (MODE(7)) | RXACTIVE | PULLUDEN | PULLDOWN_EN }, /* lcd_data15 */ // Enable +ve level Enter Switch
+ 
+         {-1},
+ };
+-- 
+2.17.1
+

@@ -1,0 +1,26 @@
+From 3a0cb883caf973530e262b216c008d39bdfaf592 Mon Sep 17 00:00:00 2001
+From: BodduKishoreKumar <kishore@kernelmasters.org>
+Date: Tue, 4 May 2021 21:53:40 +0530
+Subject: [PATCH 2/3] Select LCD_DATA14 pin functionality to GPIO0_10 to
+ control RED LED Device
+
+---
+ board/ti/am335x/mux.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/board/ti/am335x/mux.c b/board/ti/am335x/mux.c
+index 1fa0bc8e..6f573fa7 100644
+--- a/board/ti/am335x/mux.c
++++ b/board/ti/am335x/mux.c
+@@ -31,7 +31,7 @@ static struct module_pin_mux lcd_pin_mux[] = {
+         {OFFSET(lcd_pclk),  (MODE(7) | PULLUDEN)},   /* GPIO2_24 */    //-->KM-LCD_EN
+         {OFFSET(lcd_hsync), (MODE(7) | PULLUDEN)},   /* GPIO2_23 */    //-->KM-LCD_RW
+         {OFFSET(lcd_data13), (MODE(0))},             /* lcd_data13 */ // By default disable Buzzer
+-        {OFFSET(lcd_data14), (MODE(0))},             /* lcd_data14 */ // By default disable USER LED
++        {OFFSET(lcd_data14), (MODE(7))},             /* lcd_data14 */ // Enable RED LED
+         {OFFSET(lcd_data15), (MODE(0))},             /* lcd_data15 */ // Bydefault disable USER SW
+ 
+         {-1},
+-- 
+2.17.1
+

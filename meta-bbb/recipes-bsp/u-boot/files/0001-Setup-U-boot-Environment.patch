@@ -1,0 +1,104 @@
+From d56404fea11971b43363a4e3e73ead2575bd1ab3 Mon Sep 17 00:00:00 2001
+From: BodduKishoreKumar <kishore@kernelmasters.org>
+Date: Sat, 1 May 2021 11:55:27 +0530
+Subject: [PATCH 1/3] Setup U-boot Environment
+
+---
+ Makefile                        |  2 +-
+ configs/km-bbb-am335x_defconfig | 55 +++++++++++++++++++++++++++++++++
+ km-bbb-uboot-build.sh           |  4 +--
+ 3 files changed, 58 insertions(+), 3 deletions(-)
+ create mode 100644 configs/km-bbb-am335x_defconfig
+
+diff --git a/Makefile b/Makefile
+index e291bf59..2a860c96 100644
+--- a/Makefile
++++ b/Makefile
+@@ -3,7 +3,7 @@
+ VERSION = 2019
+ PATCHLEVEL = 04
+ SUBLEVEL =
+-EXTRAVERSION = KernelMasters
++EXTRAVERSION = km-bbb-uboot
+ NAME =
+ 
+ # *DOCUMENTATION*
+diff --git a/configs/km-bbb-am335x_defconfig b/configs/km-bbb-am335x_defconfig
+new file mode 100644
+index 00000000..2cdb13d6
+--- /dev/null
++++ b/configs/km-bbb-am335x_defconfig
+@@ -0,0 +1,55 @@
++CONFIG_ARM=y
++CONFIG_ARCH_OMAP2PLUS=y
++CONFIG_TI_COMMON_CMD_OPTIONS=y
++CONFIG_AM33XX=y
++CONFIG_SPL=y
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTDELAY=28
++CONFIG_SYS_PROMPT="Kishore=> "
++CONFIG_BOOTCOMMAND="if test ${boot_fit} -eq 1; then run update_to_fit; fi; run findfdt; run init_console; run envboot; run distro_bootcmd"
++CONFIG_SYS_CONSOLE_INFO_QUIET=y
++CONFIG_VERSION_VARIABLE=y
++CONFIG_ARCH_MISC_INIT=y
++CONFIG_SPL_MUSB_NEW_SUPPORT=y
++# CONFIG_SPL_NAND_SUPPORT is not set
++CONFIG_SPL_OS_BOOT=y
++#CONFIG_AUTOBOOT_KEYED is not set
++CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
++CONFIG_AUTOBOOT_DELAY_STR="d"
++CONFIG_AUTOBOOT_STOP_STR=" "
++CONFIG_CMD_SPL=y
++# CONFIG_CMD_FLASH is not set
++CONFIG_CMD_BTRFS=y
++# CONFIG_ENV_IS_IN_FAT is not set
++CONFIG_ENV_IS_IN_EXT4=y
++CONFIG_ENV_EXT4_INTERFACE="mmc"
++CONFIG_ENV_EXT4_DEVICE_AND_PART="0:1"
++CONFIG_ENV_EXT4_FILE="/boot/uboot.env"
++CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++CONFIG_BOOTCOUNT_LIMIT=y
++CONFIG_DFU_TFTP=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_RAM=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=1
++CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
++CONFIG_MMC_OMAP_HS=y
++CONFIG_SPI_FLASH=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_PHY_MSCC=y
++CONFIG_MII=y
++CONFIG_DRIVER_TI_CPSW=y
++CONFIG_SPI=y
++CONFIG_OMAP3_SPI=y
++CONFIG_USB=y
++CONFIG_USB_MUSB_HOST=y
++CONFIG_USB_MUSB_GADGET=y
++CONFIG_USB_MUSB_DSPS=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0451
++CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
++CONFIG_USB_ETHER=y
++CONFIG_USBNET_HOST_ADDR="de:ad:be:af:00:00"
++CONFIG_OF_LIBFDT=y
+diff --git a/km-bbb-uboot-build.sh b/km-bbb-uboot-build.sh
+index 20cb6de2..ddf92d11 100755
+--- a/km-bbb-uboot-build.sh
++++ b/km-bbb-uboot-build.sh
+@@ -92,8 +92,8 @@ if [ -f .config ] ; then
+ 	echo ".config file is found. skip configuration"
+ else
+ 	echo ".config file not found. To configure the board"
+-        echo "make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- am335x_evm_defconfig"
+-        make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- am335x_evm_defconfig
++        echo "make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- km-bbb-am335x_defconfig"
++        make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- km-bbb-am335x_defconfig
+ fi
+ echo "";echo""
+ 
+-- 
+2.17.1
+
