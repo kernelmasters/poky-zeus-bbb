@@ -122,13 +122,13 @@ while [ ! -z "$1" ] ; do
 		sudo mkdir -p /mnt/rootfs
 	        sudo mount ${media}1 /mnt/rootfs/
 
+		sudo rm -rf /mnt/rootfs/*
 		echo -e "${Purple}tar -xvf console-*.tar.xz -C  /mnt/rootfs/${NC}"
 		sudo tar -xvf ${SRCDIR}/console-image-beaglebone-*.tar.xz -C  /mnt/rootfs/
 		#ls  /mnt/rootfs/lib/modules/ >  abc
 		#KERNEL_UTS=$(cat "./abc" | awk '{print $1}' | sed 's/\"//g' )
 
 		KERNEL_UTS=4.19.94-km-bbb
-		#cd /mnt/rootfs/boot/
 		sudo rm /mnt/rootfs/boot/*.dtb
 		
 		echo -e "${Purple}mkdir -p dtbs/${KERNEL_UTS}${NC}"
@@ -145,7 +145,6 @@ while [ ! -z "$1" ] ; do
 		echo -e "${Purple}Syncing ...${NC}"
 		sync
 		unmount_all_drive_partitions
-		cd -
 		;;
         esac
         shift

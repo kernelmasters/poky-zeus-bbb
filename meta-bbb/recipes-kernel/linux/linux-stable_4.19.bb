@@ -20,5 +20,4 @@ SRC_URI = " \
     file://defconfig \
     file://0001-Setup-Kernel-Environment.patch \
     file://0002-Mux-Config-in-DTS-LCD_DATA_13.GPIO0_9-LCD_DATA14.GPI.patch \
-    file://0005-Enter-Switch-GPIO11-Raising-Edge-Interrupt-porting-o.patch \
 "

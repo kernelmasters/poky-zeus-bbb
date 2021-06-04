@@ -1,0 +1,48 @@
+This README file contains information on the contents of the meta-km-bbb layer.
+
+Please see the corresponding sections below for details.
+
+Dependencies
+============
+
+  URI: https://github.com/kernelmasters/beagleboneblack-uboot.git
+  branch: master
+
+  URI: https://github.com/kernelmasters/beagleboneblack-kernel.git
+  branch: master
+
+  .
+  .
+  .
+
+Patches
+=======
+
+Please submit any patches against the meta-km-bbb layer to the kernelmasters.org  mailing list (kishore@kernelmasters.org)
+and cc: the maintainer:
+
+Maintainer: Kishore Kumar Boddu <kishore@kernelmasters.org>
+
+Table of Contents
+=================
+
+  I. Adding the meta-km-bbb layer to your build
+ II. Create bsp Receipe
+ III. Create kernel Receipe
+
+
+I. Adding the meta-km-bbb layer to your build
+=================================================
+
+Run 'bitbake-layers add-layer meta-km-bbb'
+
+II. Create bsp Receipe
+======================
+Add the below patches in u-boot Recipe
+	0002-Select-LCD_DATA14-pin-functionality-to-GPIO0_10-to-c.patch
+	0003-Select-LCD_DATA15-pin-functionality-to-GPIO0_11-to-r.patch
+
+III. Create Kernel Receipe
+=========================
+Add the below patches in Kernel Recipe
+	0005-Enter-Switch-GPIO11-Raising-Edge-Interrupt-porting-o.patch
