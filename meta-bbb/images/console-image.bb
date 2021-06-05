@@ -25,6 +25,7 @@ IMAGE_INSTALL += " \
     ${SECURITY_TOOLS} \
     ${WIREGUARD} \
     evtest \
+    helloworld \
 "
 
 export IMAGE_BASENAME = "console-image"
