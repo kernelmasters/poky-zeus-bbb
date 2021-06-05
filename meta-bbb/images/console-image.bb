@@ -24,6 +24,7 @@ IMAGE_INSTALL += " \
     ${WIFI} \
     ${SECURITY_TOOLS} \
     ${WIREGUARD} \
+    evtest \
 "
 
 export IMAGE_BASENAME = "console-image"
