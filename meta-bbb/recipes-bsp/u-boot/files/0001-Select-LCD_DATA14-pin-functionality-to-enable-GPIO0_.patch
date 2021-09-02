@@ -1,0 +1,38 @@
+From 9580a0c11769d3f3885418cafc6bb12a3b8a00a2 Mon Sep 17 00:00:00 2001
+From: Boddu Kishore Kumar <kishore@raayansystems.com>
+Date: Sat, 21 Aug 2021 14:04:47 +0530
+Subject: [PATCH 1/2] Select LCD_DATA14 pin functionality to enable GPIO0_10 to
+ RED LED
+
+---
+ board/ti/am335x/mux.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/board/ti/am335x/mux.c b/board/ti/am335x/mux.c
+index 1fa0bc8e..389ff84d 100644
+--- a/board/ti/am335x/mux.c
++++ b/board/ti/am335x/mux.c
+@@ -37,6 +37,12 @@ static struct module_pin_mux lcd_pin_mux[] = {
+         {-1},
+ };
+ 
++static struct module_pin_mux kmbbb_led_pin_mux[] = {
++        {OFFSET(lcd_data14), (MODE(7))},  /* LCD_DAT14 -> GPIO0_10 (RED LED) */
++        {-1},
++};
++
++
+ static struct module_pin_mux uart0_pin_mux[] = {
+ 	{OFFSET(uart0_rxd), (MODE(0) | PULLUP_EN | RXACTIVE)},	/* UART0_RXD */
+ 	{OFFSET(uart0_txd), (MODE(0) | PULLUDEN)},		/* UART0_TXD */
+@@ -101,6 +107,7 @@ void km_bbb_mux(void)
+ 	 configure_module_pin_mux(mmc1_pin_mux);
+ 	 configure_module_pin_mux(lcd_pin_mux);
+          configure_module_pin_mux(mii1_pin_mux);
++         configure_module_pin_mux(kmbbb_led_pin_mux);
+ }
+ 
+ void enable_board_pin_mux(void)
+-- 
+2.17.1
+
