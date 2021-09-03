@@ -75,12 +75,12 @@ MLO_uboot_copy_sd()
         echo Using dd to place bootloader on drive
 
         echo -e "${Green}-----------------------------${NC}"
-        echo -e "${Red}MLO: dd if=MLO of=/dev/sdc count=2 seek=1 bs=128k  ${NC}"
+        echo -e "${Red}MLO: dd if=${SRCDIR}/MLO of=/dev/sdc count=2 seek=1 bs=128k  ${NC}"
                 dd if=${SRCDIR}/MLO of=${media} count=2 seek=1 bs=128k
         echo -e "${Green}-----------------------------${NC}"
 
         echo -e "${Green}-----------------------------${NC}"
-        echo -e "${Red}u-boot.img: dd if=u-boot.img of=/dev/sdc count=4 seek=1 bs=384k${NC}"
+        echo -e "${Red}u-boot.img: dd if=${SRCDIR}/u-boot.img of=/dev/sdc count=4 seek=1 bs=384k${NC}"
                 dd if=${SRCDIR}/u-boot.img of=${media} count=4 seek=1 bs=384k
         echo -e "${Green}-----------------------------${NC}"
 
@@ -112,7 +112,7 @@ fi
 while [ ! -z "$1" ] ; do
         case $1 in
         -h|--help)
-		echo "usage: sudo $(basename $0) --mmc /dev/sdX "
+		echo "usage: sudo $(basename $0) --mmc /dev/sdX <image_name> "
                 ;;
 	--mmc)
 		media=$2
@@ -123,8 +123,18 @@ while [ ! -z "$1" ] ; do
 	        sudo mount ${media}1 /mnt/rootfs/
 
 		sudo rm -rf /mnt/rootfs/*
-		echo -e "${Purple}tar -xvf console-*.tar.xz -C  /mnt/rootfs/${NC}"
-		sudo tar -xvf ${SRCDIR}/console-image-beaglebone-*.tar.xz -C  /mnt/rootfs/
+		if [ "$3" = "console" ]
+		then
+			echo -e "${Purple}tar -xvf console-*.tar.xz -C  /mnt/rootfs/${NC}"
+			sudo tar -xvf ${SRCDIR}/console-image-beaglebone-*.tar.xz -C  /mnt/rootfs/
+		fi
+
+		if [ "$3" = "core" ]
+		then
+			echo -e "${Purple}tar -xvf core-*.tar.xz -C  /mnt/rootfs/${NC}"
+			sudo tar -xvf ${SRCDIR}/core-image-minimal-beaglebone-*.tar.xz -C  /mnt/rootfs/
+		fi
+
 		#ls  /mnt/rootfs/lib/modules/ >  abc
 		#KERNEL_UTS=$(cat "./abc" | awk '{print $1}' | sed 's/\"//g' )
 
