@@ -18,4 +18,5 @@ SRCREV = "58ac7b864e15789f208b285202bbc31c91edd259"
 SRC_URI = " \
     git://github.com/kernelmasters/beagleboneblack-kernel.git \
     file://defconfig \
+    file://0001-Mux-Config-in-DTS-LCD_DATA_13.GPIO0_9-LCD_DATA14.GPI.patch \
 "

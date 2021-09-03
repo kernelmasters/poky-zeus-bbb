@@ -1,0 +1,49 @@
+From 915629ea6d6f94c8bd33c74f42f6d506aa0c79a4 Mon Sep 17 00:00:00 2001
+From: Boddu Kishore Kumar <kishore@raayansystems.com>
+Date: Thu, 26 Aug 2021 21:59:12 +0530
+Subject: [PATCH 1/3] Mux Config in DTS: LCD_DATA_13.GPIO0_9,
+ LCD_DATA14.GPIO0_10, LCD_DATA_15.GPIO0_11
+
+---
+ Makefile                            | 2 +-
+ arch/arm/boot/dts/km-bbb-am335x.dts | 4 +++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 3c892a771..1d547b0fe 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2,7 +2,7 @@
+ VERSION = 4
+ PATCHLEVEL = 19
+ SUBLEVEL = 94
+-EXTRAVERSION =
++EXTRAVERSION = kishore-km-bbb-customization
+ NAME = "People's Front"
+ 
+ # *DOCUMENTATION*
+diff --git a/arch/arm/boot/dts/km-bbb-am335x.dts b/arch/arm/boot/dts/km-bbb-am335x.dts
+index f760193df..179a57f11 100644
+--- a/arch/arm/boot/dts/km-bbb-am335x.dts
++++ b/arch/arm/boot/dts/km-bbb-am335x.dts
+@@ -38,6 +38,9 @@
+                 pinctrl-single,pins = <
+                         AM33XX_IOPAD(0x970, PIN_INPUT_PULLUP | MUX_MODE0)       /* uart0_rxd.uart0_rxd */
+                         AM33XX_IOPAD(0x974, PIN_OUTPUT_PULLDOWN | MUX_MODE0)    /* uart0_txd.uart0_txd */
++                        AM33XX_IOPAD(0x8D4, MUX_MODE7)       			/* lcd_data13.gpio0_9  (Buzzer)*/
++                        AM33XX_IOPAD(0x8D8, MUX_MODE7)    			/* lcd_data14.gpio0_10 (RED LED)*/
++                        AM33XX_IOPAD(0x8DC, PIN_INPUT_PULLDOWN | MUX_MODE7)     /* lcd_data15.gpio0_11 (ENTER SW)*/
+                 >;
+         };
+ 
+@@ -71,7 +74,6 @@
+ &uart0 {
+         pinctrl-names = "default";
+         pinctrl-0 = <&uart0_pins>;
+-
+         status = "okay";
+ };
+ 
+-- 
+2.17.1
+
