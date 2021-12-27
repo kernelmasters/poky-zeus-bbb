@@ -62,6 +62,8 @@ if [ -f "${SRCDIR}/${image}-image-${MACHINE}.tar.xz" ]; then
     rootfs=${SRCDIR}/${image}-image-${MACHINE}.tar.xz
 elif [ -f "${SRCDIR}/${image}-${MACHINE}.tar.xz" ]; then
     rootfs=${SRCDIR}/${image}-${MACHINE}.tar.xz
+elif [ -f "${SRCDIR}/${image}-image-minimal-${MACHINE}.tar.xz" ]; then
+    rootfs=${SRCDIR}/${image}-image-minimal-${MACHINE}.tar.xz
 elif [ -f "${SRCDIR}/${image}" ]; then
     rootfs=${SRCDIR}/${image}
 else
