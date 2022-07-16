@@ -74,15 +74,24 @@ MLO_uboot_copy_sd()
         #       sync
         echo Using dd to place bootloader on drive
 
-        echo -e "${Green}-----------------------------${NC}"
-        echo -e "${Red}MLO: dd if=${SRCDIR}/MLO of=/dev/sdc count=2 seek=1 bs=128k  ${NC}"
-                dd if=${SRCDIR}/MLO of=${media} count=2 seek=1 bs=128k
-        echo -e "${Green}-----------------------------${NC}"
-
-        echo -e "${Green}-----------------------------${NC}"
-        echo -e "${Red}u-boot.img: dd if=${SRCDIR}/u-boot.img of=/dev/sdc count=4 seek=1 bs=384k${NC}"
-                dd if=${SRCDIR}/u-boot.img of=${media} count=4 seek=1 bs=384k
-        echo -e "${Green}-----------------------------${NC}"
+	if [ -f ${SRCDIR}/km-bbb-am335x.dtb ]
+	then
+		echo -e "${Green}-----------------------------${NC}"
+		echo -e "${Red}MLO: dd if=${SRCDIR}/MLO of=/dev/sdx count=2 seek=1 bs=128k  ${NC}"
+		dd if=${SRCDIR}/MLO of=${media} count=2 seek=1 bs=128k
+		echo -e "${Green}-----------------------------${NC}"
+		echo -e "${Red}u-boot.img: dd if=${SRCDIR}/u-boot.img of=/dev/sdx count=4 seek=1 bs=384k${NC}"
+		dd if=${SRCDIR}/u-boot.img of=${media} count=4 seek=1 bs=384k
+		echo -e "${Green}-----------------------------${NC}"
+	else
+		echo -e "${Green}-----------------------------${NC}"
+		echo -e "${Red}MLO: dd if=prebuilt-km-bbb/MLO of=/dev/sdx count=2 seek=1 bs=128k  ${NC}"
+		dd if=prebuilt-km-bbb/MLO of=${media} count=2 seek=1 bs=128k
+		echo -e "${Green}-----------------------------${NC}"
+		echo -e "${Red}u-boot.img: dd if=prebuilt-images/u-boot.img of=/dev/sdx count=4 seek=1 bs=384k${NC}"
+		dd if=prebuilt-km-bbb/u-boot.img of=${media} count=4 seek=1 bs=384k
+		echo -e "${Green}-----------------------------${NC}"
+	fi
 
 }
 
