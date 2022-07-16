@@ -135,13 +135,13 @@ while [ ! -z "$1" ] ; do
 		if [ "$4" = "console" ]
 		then
 			echo -e "${Purple}tar -xvf console-*.tar.xz -C  /mnt/rootfs/${NC}"
-			sudo tar -xvf ${SRCDIR}/console-image-beaglebone-*.tar.xz -C  /mnt/rootfs/
+			sudo tar -xvf ${SRCDIR}/console-image-beaglebone.tar.xz -C  /mnt/rootfs/
 		fi
 
 		if [ "$4" = "core" ]
 		then
 			echo -e "${Purple}tar -xvf core-*.tar.xz -C  /mnt/rootfs/${NC}"
-			sudo tar -xvf ${SRCDIR}/core-image-minimal-beaglebone-*.tar.xz -C  /mnt/rootfs/
+			sudo tar -xvf ${SRCDIR}/core-image-minimal-beaglebone.tar.xz -C  /mnt/rootfs/
 		fi
 
 		#ls  /mnt/rootfs/lib/modules/ >  abc
