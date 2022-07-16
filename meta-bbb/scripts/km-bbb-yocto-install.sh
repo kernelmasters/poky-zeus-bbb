@@ -138,14 +138,21 @@ while [ ! -z "$1" ] ; do
 		#ls  /mnt/rootfs/lib/modules/ >  abc
 		#KERNEL_UTS=$(cat "./abc" | awk '{print $1}' | sed 's/\"//g' )
 
+		# DTB Install
 		KERNEL_UTS=4.19.94-km-bbb
 		sudo rm /mnt/rootfs/boot/*.dtb
 		
 		echo -e "${Purple}mkdir -p dtbs/${KERNEL_UTS}${NC}"
 		sudo mkdir -p /mnt/rootfs/boot/dtbs/${KERNEL_UTS}
-
-		echo -e "${Purple}sudo mv km-bbb-am335x.dtb /mnt/rootfs/boot/dtbs/${KERNEL_UTS}/${NC}"
-		sudo cp ${SRCDIR}/km-bbb-am335x.dtb /mnt/rootfs/boot/dtbs/${KERNEL_UTS}/km-bbb-am335x.dtb
+		if [ -f ${SRCDIR}/km-bbb-am335x.dtb ]
+		then
+			echo -e "${Purple}sudo mv km-bbb-am335x.dtb /mnt/rootfs/boot/dtbs/${KERNEL_UTS}/${NC}"
+			sudo cp ${SRCDIR}/km-bbb-am335x.dtb /mnt/rootfs/boot/dtbs/${KERNEL_UTS}/km-bbb-am335x.dtb
+		else
+			echo -e "${Purple}sudo mv am335x-boneblack.dtb /mnt/rootfs/boot/dtbs/${KERNEL_UTS}/${NC}"
+			sudo cp ${SRCDIR}/am335x-boneblack.dtb /mnt/rootfs/boot/dtbs/${KERNEL_UTS}/km-bbb-am335x.dtb
+		fi
+		#Kernel image Install
 		echo -e "${Purple}sudo mv zImage-${KERNEL_UTS}  /mnt/rootfs/boot/vmlinuz-${KERNEL_UTS}${NC}"
 		sudo cp ${SRCDIR}/zImage  /mnt/rootfs/boot/vmlinuz-${KERNEL_UTS}
 
