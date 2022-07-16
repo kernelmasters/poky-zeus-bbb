@@ -113,9 +113,9 @@ unmount_all_drive_partitions () {
         done
 }
 
-
-if [ -z "$1" ]; then
-	echo -e "${Green}usage: sudo $(basename $0) [--mmc /dev/sdX]${NC}"
+if [ $# -ne 4 ]; then
+	echo -e "${Red}usage: sudo $(basename $0) <--mmc /dev/sdX> <--image console/core> ${NC}"
+	exit 0;
 fi
 # parse commandline options
 while [ ! -z "$1" ] ; do
@@ -132,13 +132,13 @@ while [ ! -z "$1" ] ; do
 	        sudo mount ${media}1 /mnt/rootfs/
 
 		sudo rm -rf /mnt/rootfs/*
-		if [ "$3" = "console" ]
+		if [ "$4" = "console" ]
 		then
 			echo -e "${Purple}tar -xvf console-*.tar.xz -C  /mnt/rootfs/${NC}"
 			sudo tar -xvf ${SRCDIR}/console-image-beaglebone-*.tar.xz -C  /mnt/rootfs/
 		fi
 
-		if [ "$3" = "core" ]
+		if [ "$4" = "core" ]
 		then
 			echo -e "${Purple}tar -xvf core-*.tar.xz -C  /mnt/rootfs/${NC}"
 			sudo tar -xvf ${SRCDIR}/core-image-minimal-beaglebone-*.tar.xz -C  /mnt/rootfs/
