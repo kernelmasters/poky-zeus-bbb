@@ -27,9 +27,9 @@ VIRTUAL-RUNTIME_init_manager = "sysvinit"
 
 MACHINE = "beaglebone"
 
-DL_DIR = "/home/$USER/poky-zeus-bbb/build/sources"
-SSTATE_DIR = "/home/$USER/poky-zeus-bbb/build/sstate-cache"
-TMPDIR = "/home/$USER/poky-zeus-bbb/build/tmp"
+DL_DIR = "/home/${USER}/poky-zeus-bbb/build/sources"
+SSTATE_DIR = "/home/${USER}/poky-zeus-bbb/build/sstate-cache"
+TMPDIR = "/home/${USER}/poky-zeus-bbb/build/tmp"
 
 DISTRO = "poky"
 
