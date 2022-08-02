@@ -114,7 +114,7 @@ unmount_all_drive_partitions () {
 }
 
 if [ $# -ne 4 ]; then
-	echo -e "${Red}usage: sudo $(basename $0) <--mmc /dev/sdX> <--image console/core> ${NC}"
+	echo -e "${Red}usage: sudo $(basename $0) <--mmc /dev/sdX> <--image console/core/bootloader> ${NC}"
 	exit 0;
 fi
 # parse commandline options
@@ -132,6 +132,20 @@ while [ ! -z "$1" ] ; do
 	        sudo mount ${media}1 /mnt/rootfs/
 
 		sudo rm -rf /mnt/rootfs/*
+		if [ "$4" = "bootloader" ]
+		then
+			echo -e "${Green}-----------------------------${NC}"
+			echo -e "${Red}MLO: dd if=${SRCDIR}/MLO of=/dev/sdx count=2 seek=1 bs=128k  ${NC}"
+			dd if=${SRCDIR}/MLO of=${media} count=2 seek=1 bs=128k
+			echo -e "${Green}-----------------------------${NC}"
+			echo -e "${Red}u-boot.img: dd if=${SRCDIR}/u-boot.img of=/dev/sdx count=4 seek=1 bs=384k${NC}"
+			dd if=${SRCDIR}/u-boot.img of=${media} count=4 seek=1 bs=384k
+			echo -e "${Green}-----------------------------${NC}"
+			sync
+			unmount_all_drive_partitions
+			exit 0
+		fi
+
 		if [ "$4" = "console" ]
 		then
 			echo -e "${Purple}tar -xvf console-*.tar.xz -C  /mnt/rootfs/${NC}"
